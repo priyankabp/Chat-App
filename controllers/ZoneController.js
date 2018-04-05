@@ -21,11 +21,6 @@ module.exports = {
         })
     },
 
-    update: function(){
-
-
-    },
-
     create: function(params,callback){
 
         var zips = params['zipCodes']
@@ -45,8 +40,26 @@ module.exports = {
         })
     },
 
-    destroy: function(){
+    update: function(id,params,callback){
+        Zone.findByIdAndUpdate(id,params,{new:true}, function(err,zone){
+            if(err){
+                callback(err,null)
+                return
+            }
+            callback(null, zone)
+        })
 
+
+    },
+
+    delete: function(id,callback){
+        Zone.findByIdAndRemove(id,function(err){
+            if(err){
+                callback(err,null)
+                return
+            }
+            callback(null, null)
+        })
     }
 
 }
